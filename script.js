@@ -12,6 +12,7 @@ const uncheckedCountSpan = document.getElementById('unchecked-count')
 //declare counters
 var itemCount = 0;
 var uncheckedCount = 0;
+var todoCounter = 0;
 
 function newTodo() {
     
@@ -20,19 +21,20 @@ function newTodo() {
   li.setAttribute("class", "todo-container");
 
   //create checkbox and text input field, set attributes
-  var checkBox = document.createElement('INPUT');
+  var checkBox = document.createElement("INPUT");
   checkBox.setAttribute("type", "checkbox");
-  checkBox.setAttribute("class", "todo-checkbox");
+  checkBox.setAttribute("class", `todo-checkbox-${todoCounter}`);
+  checkBox.setAttribute("id", "check");
   
   var item = document.createElement("INPUT");
   item.setAttribute("type", "text");
   item.setAttribute("class", "todo-text");
 
   //create delete button, and set attributes
-  var deleteButton = document.createElement('input');
+  var deleteButton = document.createElement("INPUT");
   deleteButton.type = "button";
   deleteButton.value = "Delete";
-  deleteButton.setAttribute("class", "todo-delete");
+  deleteButton.setAttribute("class", `todo-delete-${todoCounter}`);
   
   //apend checkbox, text field, and delete button to li
   li.appendChild(checkBox);
@@ -64,10 +66,10 @@ function boxClick(e){
   uncheckedCountSpan.innerHTML = uncheckedCount;
 }
 function deleteItem(e){
-  if (!e.target.checked){
+  
+  if(!document.getElementById('check' + e.target.id).checked){
     uncheckedCount--;
   }
-  
   itemCount--;
   
   itemCountSpan.innerHTML = itemCount;
